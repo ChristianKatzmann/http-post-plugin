@@ -10,7 +10,7 @@
 
   <!--<groupId>org.jenkins-ci.plugins</groupId>-->
   <artifactId>http-post</artifactId>
-  <version>1.0</version>
+  <version>1.1-SNAPSHOT</version>
   <packaging>hpi</packaging>
 
   <name>HTTP POST Plugin</name>
@@ -27,7 +27,7 @@
     <url>https://github.com/jenkinsci/http-post-plugin</url>
     <connection>scm:git:https://github.com/jenkinsci/http-post-plugin.git</connection>
     <developerConnection>scm:git:git@github.com:jenkinsci/http-post-plugin.git</developerConnection>
-    <tag>http-post-1.0</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <developers>
