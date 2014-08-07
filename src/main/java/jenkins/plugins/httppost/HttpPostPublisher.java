@@ -43,16 +43,26 @@ public class HttpPostPublisher extends Notifier {
   @SuppressWarnings({"unchecked", "deprecation"})
   @Override
   public boolean perform(AbstractBuild build, Launcher launcher, BuildListener listener) {
-    if (build.getResult().isWorseOrEqualTo(Result.FAILURE)) return true;
+    if (build.getResult().isWorseOrEqualTo(Result.FAILURE)) {
+      listener.getLogger().println("HTTP POST: Skipping because of FAILURE");
+      return true;
+    }
 
     List<Run.Artifact> artifacts = build.getArtifacts();
-    if (artifacts.isEmpty()) return true;
+    if (artifacts.isEmpty()) {
+      listener.getLogger().println("HTTP POST: No artifacts to POST");
+      return true;
+    }
+
+    Descriptor descriptor = getDescriptor();
+    String url = descriptor.url;
+    String headers = descriptor.headers;
+    if (url == null || url.length() == 0) {
+      listener.getLogger().println("HTTP POST: No URL specified");
+      return true;
+    }
 
     try {
-      Descriptor descriptor = getDescriptor();
-      String url = descriptor.url;
-      String headers = descriptor.headers;
-
       MultipartBuilder multipart = new MultipartBuilder();
       multipart.type(MultipartBuilder.FORM);
       for (Run.Artifact artifact : artifacts) {
@@ -69,7 +79,7 @@ public class HttpPostPublisher extends Notifier {
       builder.header("Job-Name", build.getProject().getName());
       builder.header("Build-Number", String.valueOf(build.getNumber()));
       builder.header("Build-Timestamp", String.valueOf(build.getTimeInMillis()));
-      if (headers.length() > 0) {
+      if (headers != null && headers.length() > 0) {
         String[] lines = headers.split("\r?\n");
         for (String line : lines) {
           int index = line.indexOf(':');
@@ -91,7 +101,6 @@ public class HttpPostPublisher extends Notifier {
       listener.getLogger().println(response.body().string());
     } catch (Exception e) {
       e.printStackTrace(listener.getLogger());
-      return false;
     }
 
     return true;
