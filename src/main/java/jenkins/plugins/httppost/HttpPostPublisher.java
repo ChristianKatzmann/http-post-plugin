@@ -94,7 +94,7 @@ public class HttpPostPublisher extends Notifier {
 
       long start = System.nanoTime();
       Response response = client.newCall(request).execute();
-      long time = TimeUnit.NANOSECONDS.toMicros(System.nanoTime() - start);
+      long time = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - start);
 
       listener.getLogger()
           .println(String.format("<--- %s %s (%sms)", response.code(), response.message(), time));
