@@ -66,7 +66,7 @@ public class HttpPostPublisher extends Notifier {
       MultipartBuilder multipart = new MultipartBuilder();
       multipart.type(MultipartBuilder.FORM);
       for (Run.Artifact artifact : artifacts) {
-        multipart.addFormDataPart(artifact.getFileName(), null,
+        multipart.addFormDataPart(artifact.getFileName(), artifact.getFileName(),
             RequestBody.create(null, artifact.getFile()));
       }
 
