@@ -22,7 +22,7 @@
   <properties>
     <maven-release-plugin.version>2.5</maven-release-plugin.version>
     <java.version>1.6</java.version>
-    <okhttp.version>2.0.0</okhttp.version>
+    <okhttp.version>2.1.0</okhttp.version>
   </properties>
 
   <scm>

@@ -1,6 +1,7 @@
 package jenkins.plugins.httppost;
 
 import com.squareup.okhttp.Headers;
+import com.squareup.okhttp.MultipartBuilder;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
