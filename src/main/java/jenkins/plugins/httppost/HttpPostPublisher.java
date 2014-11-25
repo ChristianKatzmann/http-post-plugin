@@ -72,8 +72,8 @@ public class HttpPostPublisher extends Notifier {
       }
 
       OkHttpClient client = new OkHttpClient();
-      client.setConnectTimeout(15, TimeUnit.SECONDS);
-      client.setReadTimeout(20, TimeUnit.SECONDS);
+      client.setConnectTimeout(30, TimeUnit.SECONDS);
+      client.setReadTimeout(60, TimeUnit.SECONDS);
 
       Request.Builder builder = new Request.Builder();
       builder.url(url);
